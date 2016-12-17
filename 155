@@ -1,0 +1,56 @@
+//
+//  main.cpp
+//  leetcode.155
+//
+//  Created by apple on 2016/11/11.
+//  Copyright © 2016年 apple. All rights reserved.
+//
+
+#include <iostream>
+
+#include <stack>
+using namespace std;
+class MinStack {
+public:
+    /** initialize your data structure here. */
+    
+    stack<int> min;
+    stack<int> nor;
+    
+    MinStack() {
+        
+    }
+    
+    void push(int x) {
+        nor.push(x);
+        if(min.empty()||x<=min.top())
+            min.push(x);
+    }
+    
+    void pop() {
+        if(nor.top()==min.top())
+        {
+            nor.pop();
+            min.pop();
+        }
+        else
+            nor.pop();
+    }
+    
+    int top() {
+        return nor.top();
+    }
+    
+    int getMin() {
+        return min.top();
+    }
+};
+
+/**
+ * Your MinStack object will be instantiated and called as such:
+ * MinStack obj = new MinStack();
+ * obj.push(x);
+ * obj.pop();
+ * int param_3 = obj.top();
+ * int param_4 = obj.getMin();
+ */
