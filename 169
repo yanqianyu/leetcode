@@ -1,0 +1,52 @@
+//
+//  main.cpp
+//  leetcode.169
+//
+//  Created by apple on 2016/10/30.
+//  Copyright © 2016年 apple. All rights reserved.
+//
+
+#include <iostream>
+#include <vector>
+
+using namespace std;
+class Solution {
+public:
+    int majorityElement(vector<int>& nums) {
+        sort(nums.begin(),nums.end());
+        int times=0;
+        int result=nums[0];
+        int f=nums.size()%2?nums.size()/2+1:nums.size()/2;
+        for(int i=0;i<nums.size();i++){
+            if(nums[i]==result){
+                times++;
+                if(times>=f)
+                    break;
+            }
+            else if(nums[i]!=result){
+                if(times>=f)
+                    break;
+                else{
+                    times=1;
+                    result=nums[i];
+                }
+            }
+        }
+        return result;
+    }
+};
+int main(){
+    vector<int> nums;
+    int x;
+    cin>>x;
+    while(x!=-1){
+        nums.push_back(x);
+        cin>>x;
+    }
+    
+    Solution s;
+    cout<<s.majorityElement(nums)<<endl;
+    for(int i=0;i<nums.size();i++)
+        cout<<nums[i]<<' ';
+    return 0;
+}
