@@ -1,0 +1,22 @@
+//
+//  main.cpp
+//  leetcode.441
+//
+//  Created by apple on 2016/11/19.
+//  Copyright © 2016年 apple. All rights reserved.
+//
+
+#include <iostream>
+#include <math.h>
+using namespace std;
+class Solution {
+public:
+    int arrangeCoins(int n) {
+        return (sqrt(2*(long)n+0.25)-0.5);
+    }
+};
+int main(){
+    Solution s;
+    cout<<s.arrangeCoins(8)<<endl;
+    return 0;
+}
