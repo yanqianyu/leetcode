@@ -1,0 +1,29 @@
+//
+//  main.cpp
+//  leetcode.344
+//
+//  Created by apple on 2016/10/15.
+//  Copyright © 2016年 apple. All rights reserved.
+//
+
+#include <iostream>
+using namespace std;
+
+class Solution {
+public:
+    string reverseString(string s){
+        string S;
+        int length=s.length();
+        for(int i=length-1;i>=0;i--)
+            S+=s[i];
+        return S;
+    }
+};
+int main(){
+    string s,S;
+    Solution a;
+    cin>>s;
+    S=a.reverseString(s);
+    cout<<S<<endl;;
+    return 0;
+}
