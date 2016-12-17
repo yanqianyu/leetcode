@@ -1,0 +1,84 @@
+//
+//  main.cpp
+//  leetcode.203
+//
+//  Created by apple on 2016/10/16.
+//  Copyright © 2016年 apple. All rights reserved.
+//
+
+#include <iostream>
+
+using namespace  std;
+struct ListNode {
+    int val;
+    ListNode *next;
+    ListNode(int x) : val(x), next(NULL) {}
+    ListNode(){
+        val=0;
+        next=NULL;
+    }
+};
+class Solution {
+public:
+    ListNode* removeElements(ListNode* head, int val) {
+        ListNode* temp=new ListNode(0);
+        temp->next=head;
+        ListNode* p=head;
+        ListNode* q=temp;
+        while(p!=NULL){
+            if(p->val!=val){
+                p=p->next;
+                q=q->next;
+            }
+            else{
+                q->next=p->next;
+                p=p->next;
+            }
+        }
+        return temp->next;
+    }
+    ListNode* create(){
+        ListNode* head=new ListNode;
+        ListNode* temp=new ListNode;
+        ListNode* p=new ListNode;
+        p=temp;
+        int n=0;
+        cin>>temp->val;
+        while(temp->val!=-1){
+            n++;
+            if(n==1){
+                head=temp;
+                temp->next=NULL;
+            }
+            else{
+                p->next=temp;
+            }
+            p=temp;
+            temp=new ListNode;
+            cin>>temp->val;
+        }
+        p->next=NULL;
+        delete temp;
+        temp=NULL;
+        return head;
+    }
+    
+};
+void show(ListNode* head){
+    ListNode* temp=new ListNode;
+    temp=head;
+    while(temp!=NULL){
+        cout<<temp->val<<' ';
+        temp=temp->next;
+    }
+    cout<<endl;
+}
+int main(){
+    Solution s;
+    ListNode* head;
+    head=s.create();
+    show(head);
+    head=s.removeElements(head, 1);
+    show(head);
+    return 0;
+}
