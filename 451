@@ -1,0 +1,43 @@
+//
+//  main.cpp
+//  leetcode.451
+//
+//  Created by apple on 2016/11/17.
+//  Copyright © 2016年 apple. All rights reserved.
+//
+
+#include <iostream>
+#include <vector>
+
+using namespace std;
+class Solution {
+public:
+    string frequencySort(string s) {
+        vector<pair<char, int>> count(256);
+        for(int i=0;i<s.length();i++){
+            count[s[i]].first=s[i];
+            count[s[i]].second++;
+        }
+        sort(count.begin(),count.end(),[](pair<char,int>&a,pair<char,int>&b){return a.second>b.second;});
+        /*for(int i=0;i<count.size();i++){
+            for(int j=i;j<count.size();j++){
+                if(count[i].second<count[i+1].second)
+                {
+                    swap(count[i], count[i+1]);
+                }
+            }
+        }*/
+        string anw;
+        for(int i=0;i<count.size();i++){
+            for(int j=0;j<count[i].second;j++)
+                anw+=count[i].first;
+        }
+        return anw;
+    }
+};
+int main(){
+    string s;
+    cin>>s;
+    Solution a;
+    cout<<a.frequencySort(s)<<endl;
+}
