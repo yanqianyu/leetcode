@@ -1,0 +1,51 @@
+//
+//  main.cpp
+//  leetcode.220
+//
+//  Created by apple on 2016/11/12.
+//  Copyright © 2016年 apple. All rights reserved.
+//
+
+#include <iostream>
+#include <vector>
+using namespace std;
+struct node{
+    int data;
+    int index;
+};
+int sort1(node& n1,node& n2){
+    return n1.data<n2.data;
+}
+class Solution {
+public:
+    
+    bool containsNearbyAlmostDuplicate(vector<int>& nums, int k, int t) {
+        if(nums.size()<=0)
+            return false;
+        vector<node> n;
+        node temp;
+        for(int i=0;i<nums.size();i++){
+            temp.data=nums[i];
+            temp.index=i;
+            n.push_back(temp);
+        }
+        sort(n.begin(),n.end(),sort1);
+        int i=0,j=1;
+        while(i<j&&j<n.size()){
+            if(n[j].data<=n[i].data+t){
+                if(abs(n[i].index-n[j].index)<=k)
+                    return true;
+                j++;
+                if(i<j&&j==n.size()){
+                    i++;
+                    j=i+1;
+                }
+            }
+            else{
+                i++;
+                j=i+1;
+            }
+        }
+        return false;
+    }
+};
