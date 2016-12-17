@@ -1,0 +1,52 @@
+//
+//  main.cpp
+//  leetcode.414
+//
+//  Created by apple on 2016/10/30.
+//  Copyright © 2016年 apple. All rights reserved.
+//
+
+#include <iostream>
+#include <vector>
+
+using namespace  std;
+class Solution {
+public:
+    
+    int thirdMax(vector<int>& nums) {
+        if(nums.size()==0)
+            return 0;
+        long int a=LONG_MIN;
+        long int b=LONG_MIN;
+        long int c=LONG_MIN;
+        for(int i=0;i<nums.size();i++){
+            if(nums[i]>a){
+                c=b;
+                b=a;
+                a=nums[i];
+            }
+            else if(nums[i]<a&&nums[i]>b){
+                c=b;
+                b=nums[i];
+            }
+            else if(nums[i]<b&&nums[i]>c){
+                c=nums[i];
+            }
+        }
+        return c==LONG_MIN?a:c;
+    }
+    };
+int main(){
+    vector<int> nums;
+    Solution s;
+    int x;
+    int i=0;
+    cin>>x;
+    while(x!=-1){
+        nums.push_back(x);
+        i++;
+        cin>>x;
+    }
+    cout<<s.thirdMax(nums)<<endl;
+    return 0;
+}
