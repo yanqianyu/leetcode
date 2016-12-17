@@ -1,0 +1,42 @@
+//
+//  main.cpp
+//  leetcode.396
+//
+//  Created by apple on 2016/10/16.
+//  Copyright © 2016年 apple. All rights reserved.
+//
+
+#include <iostream>
+#include<vector>
+#include<algorithm>
+using namespace std;
+class Solution {
+public:
+    int maxRotateFunction(vector<int>& A) {
+        int length=A.size();
+        int i=0;
+        int sum=0;
+        int sum_of_ele=0;
+        for(i=0;i<length;i++){
+            sum_of_ele+=A[i];
+            sum+=A[i]*i;
+        }
+        int max=0;
+        max=sum>max?sum:max;
+        int j=1;
+        while(j<length){
+            int temp=sum+sum_of_ele-A[length-j]*length;
+            max=temp>max?temp:max;
+            sum=temp;
+            j++;
+        }
+        return max;
+    }
+};
+int main(){
+    Solution s;
+    vector<int> A;
+    A={1,2,3,4,5,6,7,8,9,10};
+    cout<<s.maxRotateFunction(A)<<endl;
+    return 0;
+}
