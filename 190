@@ -1,0 +1,29 @@
+//
+//  main.cpp
+//  leetcode.190
+//
+//  Created by apple on 2016/10/16.
+//  Copyright © 2016年 apple. All rights reserved.
+//
+
+#include <iostream>
+
+using namespace std;
+class Solution {
+public:
+    uint32_t reverseBits(uint32_t n) {
+        int n_reverse=0;
+        for(int i=0;i<32;i++){
+            int temp=n&1;//取n的最后一位
+            n=n>>1;
+            n_reverse=(n_reverse<<1)|temp;
+        }
+        return n_reverse;
+    }
+};
+int main(){
+    Solution s;
+    uint32_t i=s.reverseBits(43261596);
+    cout<<i<<endl;
+    return 0;
+}
