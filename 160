@@ -1,0 +1,50 @@
+//
+//  main.cpp
+//  leetcode.160
+//
+//  Created by apple on 2016/10/15.
+//  Copyright © 2016年 apple. All rights reserved.
+//
+
+#include <iostream>
+
+using namespace std;
+struct ListNode {
+ int val;
+ ListNode *next;
+ ListNode(int x) : val(x), next(NULL) {}
+};
+class Solution {
+public:
+   int getLength(ListNode* head){
+        int n=0;
+        while(head!=NULL)
+        {
+            head=head->next;
+            n++;
+        }
+       return n;
+    }
+    ListNode *getIntersectionNode(ListNode *headA, ListNode *headB) {
+        ListNode* a,* b;
+        int i=getLength(headA);
+        int j=getLength(headB);
+        a=headA;
+        b=headB;
+        int n=i-j;
+        for(int k=0;k<abs(n);k++)
+            if(n>0)
+                a=a->next;
+            else
+                b=b->next;
+        while(a&&b){
+            if(a==b)
+            {
+                return a;
+            }
+                a=a->next;
+                b=b->next;
+        }
+        return NULL;
+    }
+};
