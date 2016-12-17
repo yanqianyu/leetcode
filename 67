@@ -1,0 +1,47 @@
+//
+//  main.cpp
+//  leetcode.67
+//
+//  Created by apple on 2016/11/10.
+//  Copyright © 2016年 apple. All rights reserved.
+//
+
+#include <iostream>
+#include <string>
+using namespace std;
+class Solution {
+public:
+    string addBinary(string a, string b) {
+        string result;
+        int al=a.length();
+        int bl=b.length();
+        int val=0;
+        int bit=0;
+        int length=max(al,bl);
+        for(int i=length-a.length();i>0;i--)
+            a.insert(a.begin(), '0');
+        for(int i=length-b.length();i>0;i--)
+            b.insert(b.begin(), '0');
+        for(int i=length-1;i>=0;i--){
+            bit=a[i]-'0'+b[i]-'0'+val;
+            if(bit>=2){
+                result.insert(result.begin(), '0'+bit%2);
+                val=1;
+            }
+            else{
+                result.insert(result.begin(), '0'+bit);
+                val=0;
+            }
+        }
+        if(val==1)
+            result.insert(result.begin(), '1');
+        return result;
+    }
+};
+int main(){
+    string a,b;
+    cin>>a;
+    cin>>b;
+    Solution s;
+    cout<<s.addBinary(a, b)<<endl;
+}
