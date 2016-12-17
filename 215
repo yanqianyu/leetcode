@@ -1,0 +1,31 @@
+//
+//  main.cpp
+//  leetcode.215
+//
+//  Created by apple on 2016/10/30.
+//  Copyright © 2016年 apple. All rights reserved.
+//
+
+#include <iostream>
+#include <vector>
+
+using namespace std;
+class Solution {
+public:
+    int findKthLargest(vector<int>& nums, int k) {
+        sort(nums.begin(),nums.end());
+        return nums[nums.size()-k];
+    }
+};
+int main(){
+    vector<int > nums;
+    int x;
+    cin>>x;
+    while(x!=-1){
+        nums.push_back(x);
+        cin>>x;
+    }
+    Solution s;
+    cout<<s.findKthLargest(nums, 4);
+    return 0;
+}
