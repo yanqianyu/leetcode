@@ -1,0 +1,25 @@
+//
+//  main.cpp
+//  leetcode.237
+//
+//  Created by apple on 2016/10/16.
+//  Copyright © 2016年 apple. All rights reserved.
+//
+
+#include <iostream>
+
+using namespace std;
+struct ListNode {
+    int val;
+    ListNode *next;
+    ListNode(int x) : val(x), next(NULL) {}
+};
+class Solution {
+public:
+    void deleteNode(ListNode* node) {
+        if(node==NULL||node->next==NULL)
+            return;
+        node->val=node->next->val;//把下一个结点的值赋给当前结点
+        node->next=node->next->next;//越过下一个结点，相当于删除了当前结点
+    }
+};
