@@ -1,0 +1,50 @@
+//
+//  main.cpp
+//  leetcode.102
+//
+//  Created by apple on 2016/10/17.
+//  Copyright © 2016年 apple. All rights reserved.
+//
+
+#include <iostream>
+#include<vector>
+#include<queue>
+using namespace std;
+struct TreeNode {
+    int val;
+    TreeNode *left;
+    TreeNode *right;
+    TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+};
+class Solution {
+public:
+    vector<vector<int>> levelOrder(TreeNode* root) {
+        queue<TreeNode*>q1,q2;//q1记录当层结点，q2记录q1结点对应的下一层结点
+        vector<vector<int>> result;//result记录总的结果，每一层是树的一层
+        vector<int> temp;//temp记录当前层的结果
+        if(root==NULL)//树不存在
+            return result;
+        q1.push(root);//第一层
+        while(!q1.empty()){
+            temp.clear();
+            int size=q1.size();
+            for(int i=0;i<size;i++){
+                TreeNode* nodetemp=q1.front();
+                q1.pop();//清空当前层最左边的结点
+                if(nodetemp->left){
+                    q2.push(nodetemp->left);//q2记录被删除结点的左右子结点
+                }
+                if(nodetemp->right){
+                    q2.push(nodetemp->right);
+                }
+                temp.push_back(nodetemp->val);
+            }
+            while(!q2.empty()){
+                q1.push(q2.front());//倒回q1
+                q2.pop();
+            }
+            result.push_back(temp);
+        }
+        return result;
+    }
+};
