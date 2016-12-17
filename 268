@@ -1,0 +1,24 @@
+//
+//  main.cpp
+//  leetcode.268
+//
+//  Created by apple on 2016/11/11.
+//  Copyright © 2016年 apple. All rights reserved.
+//
+
+#include <iostream>
+#include <vector>
+using namespace std;
+class Solution {
+public:
+    int missingNumber(vector<int>& nums) {
+        sort(nums.begin(),nums.end());
+        int n=nums.size();
+        int i;
+        for(i=0;i<n;i++){
+            if(nums[i]!=i)
+                break;
+        }
+        return i;
+    }
+};
