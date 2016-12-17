@@ -1,0 +1,32 @@
+//
+//  main.cpp
+//  leetcode.219
+//
+//  Created by apple on 2016/10/31.
+//  Copyright © 2016年 apple. All rights reserved.
+//
+
+#include <iostream>
+#include <map>
+#include <vector>
+using namespace std;
+class Solution {
+public:
+    bool containsNearbyDuplicate(vector<int>& nums, int k)
+    {
+        if(nums.size()<2)
+            return false;
+        map<int,int> hash;
+        for(int i=0;i<nums.size();i++){
+            if(hash.find(nums[i])!=hash.end()){
+                int j=(hash.find(nums[i]))->second;
+                if(i-j<=k)
+                    return true;
+                else
+                    hash.erase(hash.find(nums[i]));
+            }
+            hash.insert(make_pair(nums[i], i));
+        }
+        return false;
+    }
+};
