@@ -1,0 +1,30 @@
+//
+//  main.cpp
+//  leetcode.238(2)
+//
+//  Created by apple on 2016/11/14.
+//  Copyright © 2016年 apple. All rights reserved.
+//
+
+#include <iostream>
+
+#include <vector>
+using namespace std;
+class Solution {
+public:
+    vector<int> productExceptSelf(vector<int>& nums) {
+        vector<int> result;
+        vector<int> right(nums.size(),1);
+        vector<int> left(nums.size(),1);
+        for(int i=1;i<nums.size();i++){
+            left[i]=left[i-1]*nums[i-1];
+        }
+        for(int i=nums.size()-2;i>=0;i--){
+            right[i]=right[i+1]*nums[i+1];
+        }
+        for(int i=0;i<nums.size();i++){
+            result.push_back(right[i]*left[i]);
+        }
+        return result;
+    }
+};
