@@ -1,0 +1,32 @@
+#include <iostream>
+#include <vector>
+using namespace std;
+class Solution {
+public:
+    int rob(vector<int>& nums) {
+        if(nums.size()==0)
+            return 0;
+        vector<int> a,b;
+        a.push_back(0);//不抢最后一家
+        b.push_back(nums[0]);//抢最后一家
+        for(int i=1;i<nums.size();i++){
+            b.push_back(a[i-1]+nums[i]);
+            a.push_back(max(b[i-1], a[i-1]));
+        }
+        for(int i=0;i<nums.size();i++){
+            cout<<a[i]<<' '<<b[i]<<endl;
+        }
+        return max(b[nums.size()-1], a[nums.size()-1]);
+    }
+};
+int main(){
+    int temp;
+    Solution s;
+    vector<int> nums;
+    for(int i=0;i<4;i++){
+        cin>>temp;
+        nums.push_back(temp);
+    }
+    int res=s.rob(nums);
+    return 0;
+}
