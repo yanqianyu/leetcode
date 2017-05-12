@@ -1,0 +1,49 @@
+#include <iostream>
+#include <vector>
+#include <math.h>
+using namespace std;
+class Solution {
+public:
+    int result;
+    int findTargetSumWays(vector<int>& nums, int S) {
+        /*int count=0;
+        int sum=0;
+        for(int i=0;i<nums.size();i++)
+            sum+=nums[i];
+        int* result=new int[(int)(pow(2,nums.size()+1)-1)];
+        result[0]=sum;
+        for(int i=0;i<nums.size();i++){
+            for(int j=(int)(pow(2,i+1)-1);j<(int)(pow(2,i+1))+(int)(pow(2,i+1)-1);j++){
+                if(j%2==0){
+                    result[j]=result[j/2-1]-2*nums[i];
+                }
+                else
+                    result[j]=result[j/2];
+            }
+        }
+        for(int i=0;i<(int)(pow(2,nums.size()+1)-1);i++)
+            if(i%2==0&&S==result[i])
+                count++;
+        
+        return count;*/
+        
+        dfs(0,0,nums,S);
+        return result;
+    }
+    
+    void dfs(int sum,int count,vector<int> &nums,int S){
+        if(count==nums.size()){
+            if(sum==S)
+                result++;
+            return ;
+        }
+        dfs(sum+nums[count], count+1, nums, S);
+        dfs(sum-nums[count], count+1, nums, S);
+    }
+};
+int main(){
+    vector<int> nums(5,1);
+    Solution s;
+    cout<<s.findTargetSumWays(nums, 3)<<endl;
+    
+}
