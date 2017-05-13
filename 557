@@ -1,0 +1,37 @@
+#include <iostream>
+#include <string>
+#include <vector>
+using namespace std;
+class Solution {
+public:
+    string reverseWords(string s) {
+        int i=0,j=0;
+        string a;
+        for(j=0;j<=s.size();){
+            if(s[j]!=' '&&s[j]!='\0'){
+                j++;
+            }
+            else{
+                for(int k=j-1;k>=i;k--){
+                    a.push_back(s[k]);
+                }
+                if(s[j]==' '){
+                    a.push_back(' ');
+                    i=j+1;
+                    j++;
+                }
+                else if(s[j]=='\0'){
+                    a.push_back('\0');
+                    break;
+                }
+            }
+        }
+        return a;
+    }
+};
+int main(){
+    Solution s;
+    string a="Let's take leetcode";
+    cout<<s.reverseWords(a)<<endl;
+    
+}
