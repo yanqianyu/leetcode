@@ -1,0 +1,32 @@
+#include <iostream>
+#include <vector>
+#include <math.h>
+using namespace std;
+class Solution {
+public:
+    int findComplement(int num) {
+        vector<int> a=binary(num);
+        return re_binary(a);
+    }
+    vector<int> binary(int num){
+        vector<int> a;
+        int x;
+        while(num!=0){
+            x=num%2;
+            a.push_back(x);
+            num/=2;
+        }
+        return a;
+    }
+    int re_binary(vector<int> num){
+        int x=0;
+        for(int i=0;i<num.size();i++){
+            x+=(1-num[i])*pow(2,i);
+        }
+        return x;
+    }
+};
+int main(){
+    Solution s;
+    cout<<s.findComplement(5)<<endl;
+}
