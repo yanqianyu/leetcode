@@ -1,0 +1,38 @@
+#include <iostream>
+using namespace std;
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+struct TreeNode {
+    int val;
+    TreeNode *left;
+    TreeNode *right;
+    TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+};
+class Solution {
+public:
+    int maxDepth=0;
+    int val;
+    void dfs(TreeNode* root,int depth){
+        if(!root)
+            return ;
+        if(depth>maxDepth){
+            maxDepth=depth;
+            val=root->val;
+        }
+        if(root->left)
+            dfs(root->left, depth+1);
+        if(root->right)
+            dfs(root->right, depth+1);
+    }
+    int findBottomLeftValue(TreeNode* root) {
+        dfs(root, 1);
+        return val;
+    }
+};
