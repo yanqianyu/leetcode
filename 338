@@ -1,0 +1,23 @@
+#include <iostream>
+#include <vector>
+using namespace std;
+class Solution {
+public:
+    vector<int> countBits(int num) {
+        vector<int> result;
+        for(int i=0;i<=num;i++){
+            result.push_back(getNum(i));
+        }
+        return result;
+    }
+    int getNum(int num){
+        int temp=0,count=0;
+        while(num!=0){
+            temp=num%2;
+            num/=2;
+            if(temp==1)
+                count++;
+        }
+        return count;
+    }
+};
