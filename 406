@@ -1,0 +1,28 @@
+#include <iostream>
+#include <vector>
+using namespace std;
+
+bool cmp(pair<int, int>& a,pair<int, int>& b){
+        return a.first==b.first?a.second<b.second:a.first>b.first;
+    }
+class Solution {
+public:
+    
+    vector<pair<int, int>> reconstructQueue(vector<pair<int, int>>& people) {
+        
+        sort(people.begin(), people.end(), cmp);
+        vector<pair<int, int>> result;
+        for(int i=0;i<people.size();i++)
+            result.insert(result.begin()+people[i].second, people[i]);
+        
+        return result;
+    }
+};
+
+int main(){
+    vector<pair<int, int>> a={{7,0},{4,4},{7,1},{5,0},{6,1},{5,2}};
+    Solution s;
+    vector<pair<int, int>> b=s.reconstructQueue(a);
+    for(int i=0;i<b.size();i++)
+        cout<<b[i].first<<' '<<b[i].second<<endl;
+}
