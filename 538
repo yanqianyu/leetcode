@@ -1,0 +1,34 @@
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+#include <iostream>
+
+using namespace std;
+struct TreeNode {
+    int val;
+    TreeNode *left;
+    TreeNode *right;
+    TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+};
+class Solution {
+public:
+    TreeNode* convertBST(TreeNode* root) {
+        add(root, 0);
+        return root;
+    }
+    int add(TreeNode* root,int sum){//后序遍历
+        if(root==NULL)
+            return 0;
+        int right=add(root->right, sum);
+        int left=add(root->left,sum+right+root->val);
+        int result=right+left+root->val;
+        root->val+=sum+right;
+        return result;
+    }
+};
