@@ -1,0 +1,67 @@
+#include <iostream>
+#include <vector>
+using namespace std;
+class Solution {
+public:
+    int m,n;
+    vector<vector<bool>> visited;
+    void dfs(vector<vector<char>>& board,int x,int y){
+        
+        int mines=0;
+        
+        if(board[x][y]=='M'){
+            board[x][y]='X';
+            return ;
+        }
+        if(board[x][y]!='E'){
+            return ;
+        }
+        
+        int offsetX[8]={-1,-1,-1,0,0, 1,1, 1};
+        int offsetY[8]={-1, 0, 1,1,-1,1,0,-1};
+        
+        visited[x][y]=true;
+        
+        for(int i=0;i<8;i++){
+            int X=x+offsetX[i];
+            int Y=y+offsetY[i];
+            
+            if(X<0||X>=m||Y<0||Y>=n){
+                continue;
+            }
+            if(board[X][Y]=='M'||board[X][Y]=='X')
+                mines++;
+        }
+        
+        if(mines>0){
+            board[x][y]='0'+mines;
+            return ;
+        }
+        else{
+            board[x][y]='B';
+        }
+        
+        for(int i=0;i<8;i++){
+            int X=x+offsetX[i];
+            int Y=y+offsetY[i];
+            
+            if(X<0||X>=m||Y<0||Y>=n||visited[X][Y]){
+                continue;
+            }
+            dfs(board, X, Y);
+        }
+    }
+    
+    vector<vector<char>> updateBoard(vector<vector<char>>& board, vector<int>& click) {
+        
+        m=board.size();
+        n=board[0].size();
+        
+        visited.assign(m, vector<bool>(n, false));
+        
+        for(int i=0;i<click.size();i+=2){
+            dfs(board, click[i], click[i+1]);
+        }
+        return board;
+    }
+};
