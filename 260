@@ -1,0 +1,26 @@
+#include <iostream>
+#include <vector>
+#include <map>
+using namespace std;
+class Solution {
+public:
+    vector<int> singleNumber(vector<int>& nums) {
+        vector<int> result;
+        map<int,int> m;
+        for(int i=0;i<nums.size();i++){
+            map<int,int>::iterator iter=m.find(nums[i]);
+            if(iter!=m.end()){
+                iter->second++;
+            }
+            else{
+                m.insert(pair<int,int>(nums[i],1));
+            }
+        }
+        for(map<int,int>::iterator i=m.begin();i!=m.end();i++){
+            if(i->second==1){
+                result.push_back(i->first);
+            }
+        }
+        return result;
+    }
+};
