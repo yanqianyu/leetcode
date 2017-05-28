@@ -1,0 +1,37 @@
+#include <iostream>
+#include <vector>
+using namespace std;
+class Solution {
+public:
+    int findCircleNum(vector<vector<int>>& M) {
+        if(M.empty())
+            return 0;
+        
+        int m=M.size();
+        //int n=M[0].size();
+        vector<bool> visited;
+        for(int i=0;i<m;i++)
+            visited.push_back(false);
+        
+        int result=0;
+        for(int i=0;i<visited.size();i++){
+            result+=dfs(i, M, visited)>0;
+        }
+        return result;
+    }
+    
+    int dfs(int i,vector<vector<int>> &M,vector<bool> &visited){
+        if(visited[i]){
+            return 0;
+        }
+        int a=1;
+        visited[i]=true;
+        for(int j=0;j<visited.size();j++){
+            if(i!=j&&M[i][j]){
+                a+=dfs(j, M, visited);
+            }
+        }
+        return a;
+    }
+    
+};
