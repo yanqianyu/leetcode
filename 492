@@ -1,0 +1,19 @@
+#include <iostream>
+#include <vector>
+using namespace std;
+class Solution {
+public:
+    vector<int> constructRectangle(int area) {
+        vector<int> result;
+        int i,temp = 1;
+        for(i=1;i*i<=area;i++){
+            if(area%i>0)
+                continue;
+            temp=area/i;
+        }
+        
+        result.push_back(temp);
+        result.push_back(area/temp);
+        return result;
+    }
+};
