@@ -1,0 +1,31 @@
+#include <iostream>
+#include <vector>
+using namespace std;
+class Solution {
+public:
+    int arrayNesting(vector<int>& nums) {
+        vector<bool> visited;
+        for(int i=0;i<nums.size();i++){
+            visited.push_back(false);
+        }
+        
+        vector<vector<int>> result;
+        int max=-1;
+        for(int i=0;i<nums.size();i++){
+            if(visited[i])
+                continue;
+            vector<int > temp;
+            
+            while(!visited[i]){
+                temp.push_back(nums[i]);
+                visited[i]=true;
+                i=nums[i];
+            }
+            result.push_back(temp);
+            if((int)(temp.size())>max){
+                max=temp.size();
+            }
+        }
+        return max;
+    }
+};
