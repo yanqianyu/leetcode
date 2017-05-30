@@ -1,0 +1,43 @@
+#include <iostream>
+#include <vector>
+#include <map>
+using namespace std;
+class Map{
+public:
+    int num;
+    int times;
+    Map(int _num,int _times){
+        num=_num;
+        times=_times;
+    }
+    bool operator<(const Map& m) const{
+        return times>m.times;
+    }
+};
+class Solution {
+public:
+    vector<int> topKFrequent(vector<int>& nums, int k) {
+        map<int,int> mp;
+        map<int,int> ::iterator it;
+        for(int i=0;i<nums.size();i++){
+            if(mp.find(nums[i])==mp.end()){
+                mp[nums[i]]=1;
+            }
+            else{
+                mp[nums[i]]++;
+            }
+        }
+        
+        vector<Map> p;
+        for(it=mp.begin();it!=mp.end();it++){
+            p.push_back(Map(it->first,it->second));
+        }
+        sort(p.begin(),p.end());
+        
+        vector<int> result;
+        for(int i=0;i<k;i++){
+            result.push_back(p[i].num);
+        }
+        return result;
+    }
+};
