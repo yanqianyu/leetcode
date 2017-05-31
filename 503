@@ -1,0 +1,27 @@
+#include <iostream>
+#include <vector>
+
+using namespace std;
+class Solution {
+public:
+    vector<int> nextGreaterElements(vector<int>& nums) {
+        vector<int> result;
+        vector<int> q;
+        for(int i=0;i<nums.size();i++)
+            q.push_back(nums[i]);
+        for(int i=0;i<nums.size();i++){
+            int flag=1;
+            for(int j=i;j<q.size();j++){
+                if(q[j]>nums[i]){
+                    flag=0;
+                    result.push_back(q[j]);
+                    break;
+                }
+            }
+            if(flag==1)
+                result.push_back(-1);
+            q.push_back(nums[i]);
+        }
+        return result;
+    }
+};
