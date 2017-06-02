@@ -1,0 +1,22 @@
+#include <iostream>
+#include <vector>
+using namespace std;
+class Solution {
+public:
+    int findContentChildren(vector<int>& g, vector<int>& s) {
+        sort(g.begin(),g.end());
+        sort(s.begin(),s.end());
+        
+        int result=0;
+        int sum=0;
+        for(int i=0;i<g.size();i++){
+            while(sum<s.size()&&s[sum]<g[i])
+                sum++;
+            if(sum==s.size())
+                break;
+            result++;
+            sum++;
+        }
+        return result;
+    }
+};
