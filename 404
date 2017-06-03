@@ -1,0 +1,34 @@
+#include <iostream>
+
+using namespace std;
+struct TreeNode {
+    int val;
+    TreeNode *left;
+    TreeNode *right;
+    TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+};
+class Solution {
+public:
+    int sum=0;
+    int sumOfLeftLeaves(TreeNode* root) {
+        dfs(root);
+        return sum;
+    }
+    void dfs(TreeNode* root){
+        if(root==NULL)
+            return ;
+        if(root->left){
+            if(root->left->left==NULL&&root->left->right==NULL){
+                sum+=root->left->val;
+                dfs(root->right);
+            }
+            else{
+                dfs(root->left);
+                dfs(root->right);
+            }
+        }
+        else{
+            dfs(root->right);
+        }
+    }
+};
