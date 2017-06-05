@@ -1,0 +1,31 @@
+#include <iostream>
+#include <vector>
+#include <map>
+using namespace std;
+class Solution {
+public:
+    vector<string> findRestaurant(vector<string>& list1, vector<string>& list2){
+        map<string,int> result;
+        for(int i=0;i<list1.size();i++){
+            for(int j=0;j<list2.size();j++){
+                if(list1[i]==list2[j]){
+                    result.insert(pair<string,int>(list1[i],i+j));
+                }
+            }
+        }
+        map<string,int>::iterator it=result.begin();
+        int min=it->second;
+        vector<string> re;
+        for(it=result.begin();it!=result.end();it++){
+            if(it->second<min){
+                min=it->second;
+            }
+        }
+        for(it=result.begin();it!=result.end();it++){
+            if(it->second==min){
+                re.push_back(it->first);
+            }
+        }
+        return re;
+    }
+};
