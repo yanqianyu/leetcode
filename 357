@@ -1,0 +1,30 @@
+#include <iostream>
+
+using namespace std;
+class Solution {
+public:
+    long num[11];
+    Solution(){
+        num[0]=1;
+        num[1]=9;
+        num[2]=9*9;
+        num[3]=9*9*8;
+        num[4]=9*9*8*7;
+        num[5]=9*9*8*7*6;
+        num[6]=9*9*8*7*6*5;
+        num[7]=9*9*8*7*6*5*4;
+        num[8]=9*9*8*7*6*5*4*3;
+        num[9]=9*9*8*7*6*5*4*3*2;
+        num[10]=9*9*8*7*6*5*4*3*2*1;
+    }
+    int countNumbersWithUniqueDigits(int n) {
+        int result=0;
+        if(n>10)
+            return result;
+        else{
+            for(int i=0;i<=n;i++)
+                result+=num[i];
+        }
+        return result;
+    }
+};
