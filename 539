@@ -1,0 +1,29 @@
+#include <iostream>
+#include <vector>
+using namespace std;
+class Solution {
+public:
+    int findMinDifference(vector<string>& timePoints) {
+        if(timePoints.empty())
+            return 0;
+        
+        vector<int> time;
+        for(int i=0;i<timePoints.size();i++){
+            int a=(timePoints[i][0]-48)*10+(timePoints[i][1]-48);
+            int b=(timePoints[i][3]-48)*10+(timePoints[i][4]-48);
+            time.push_back(a*60+b);
+        }
+        sort(time.begin(),time.end());
+        vector<int> result;
+        for(int i=0;i<time.size()-1;i++){
+            result.push_back(time[i+1]-time[i]);
+        }
+        result.push_back(24*60-(time[time.size()-1]-time[0]));
+        int min=result[0];
+        for(int i=1;i<result.size();i++){
+            if(min>result[i])
+                min=result[i];
+        }
+        return min;
+    }
+};
