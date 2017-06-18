@@ -1,0 +1,35 @@
+#include <iostream>
+#include <map>
+using namespace std;
+class Solution {
+public:
+    int longestPalindrome(string s) {
+        map<char,int> m;
+        map<char,int>::iterator it;
+        for(int i=0;i<s.size();i++){
+            it=m.find(s[i]);
+            if(it!=m.end()){
+                it->second++;
+            }
+            else{
+                m.insert(pair<char, int>(s[i],1));
+            }
+        }
+        if(m.size()==1){
+            it=m.begin();
+            return it->second;
+        }
+        int result=0;
+        int center=0;
+        for(it=m.begin();it!=m.end();it++){
+            if(it->second%2==0){
+                result+=it->second;
+            }
+            else{
+                center =1;
+                result+=it->second-1;
+            }
+        }
+        return result+center;
+    }
+};
