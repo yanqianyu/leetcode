@@ -1,0 +1,32 @@
+#include <iostream>
+using namespace std;
+class Solution {
+public:
+    string convertToBase7(int num) {
+        if(num==0)
+            return "0";
+        if(num>0){
+            return convert(num);
+        }
+        else{
+            num=abs(num);
+            return '-'+convert(num);
+        }
+    }
+    string convert(int num){
+        int temp=0;
+        string result;
+        
+        while(num!=0){
+            cout<<num<<' ';
+            temp=num%7;
+            num=num/7;
+            result+=(temp+48);
+            cout<<temp<<endl;
+        }
+        string s;
+        for(int i=result.size()-1;i>=0;i--)
+            s+=result[i];
+        return s;
+    }
+};
