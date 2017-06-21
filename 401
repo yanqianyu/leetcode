@@ -1,0 +1,42 @@
+#include <iostream>
+#include <vector>
+using namespace std;
+class Solution {
+public:
+    static int kind(int n){
+        int sum=0;
+        while(n!=0){
+            sum++;
+            n&=(n-1);
+        }
+        return sum;
+    }
+    vector<string> readBinaryWatch(int num) {
+        vector<string> result;
+        vector<vector<string>> hour(4);
+        vector<vector<string>> minutes(6);
+        
+        for(int i=0;i<12;i++){
+            char s[2];
+            sprintf(s, "%d",i);
+            hour[kind(i)].push_back(s);
+        }
+        
+        for(int i=0;i<60;i++){
+            char s[2];
+            sprintf(s, "%02d",i);
+            minutes[kind(i)].push_back(s);
+        }
+        
+        for(int i=0;i<4&&i<=num;i++){
+            if(num-i<6){
+                for(auto& h:hour[i]){
+                    for(auto& s:minutes[num-i]){
+                        result.push_back(h+":"+s);
+                    }
+                }
+            }
+        }
+        return result;
+    }
+};
