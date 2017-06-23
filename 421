@@ -1,0 +1,32 @@
+#include <iostream>
+#include <set>
+#include <vector>
+using namespace std;
+class Solution {
+public:
+    int findMaximumXOR(vector<int>& nums) {
+        if(nums.size()<2)
+            return 0;
+        int max=0,flag=0;
+        
+        for(int i=31;i>=0;i--){
+            set<int> hash;
+            
+            flag|=(1<<i);
+            
+            for(int x:nums){
+                hash.insert(flag&x);
+            }
+            
+            int temp=max|(1<<i);
+            
+            for(int x:hash){
+                if(hash.find(x^temp)!=hash.end()){
+                    max=temp;
+                    break;
+                }
+            }
+        }
+        return max;
+    }
+};
