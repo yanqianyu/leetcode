@@ -1,0 +1,39 @@
+#include <iostream>
+
+using namespace std;
+class Solution {
+public:
+    int a[100000];
+    int ways=0;
+    int totalNQueens(int n) {
+        //static int* a=new int[n];
+        for(int i=0;i<n;i++){
+            a[i]=-1;
+        }
+        place(n, 0);
+        return ways;
+        
+    }
+    bool check(int row,int col){
+        for(int i=0;i<row;i++){
+            if(a[i]==col)
+                return false;
+            if(row-i==abs(col-a[i]))
+                return false;
+        }
+        return true;
+    }
+    void place(int n,int temp){
+        if(temp==n){
+            ways++;
+        }
+        else{
+            for(int i=0;i<n;i++){
+                if(check(temp, i)){
+                    a[temp]=i;
+                    place(n, temp+1);
+                }
+            }
+        }
+    }
+};
