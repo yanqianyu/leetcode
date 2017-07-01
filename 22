@@ -1,0 +1,31 @@
+#include <iostream>
+#include <vector>
+using namespace std;
+
+class Solution {
+public:
+    void Compare(vector<string> &result,string temp,int left,int right){
+        if(left==0&&right==0){
+            result.push_back(temp);
+            return;
+        }
+        else{
+            if(left!=0&&left<=right){
+                Compare(result, temp+'(', left-1, right);
+            }
+            if(left<right&&right!=0){
+                Compare(result, temp+')', left, right-1);
+            }
+        }
+    }
+    vector<string> generateParenthesis(int n) {
+        string temp="";
+        int left=n;
+        int right=n;
+        vector<string> result;
+        if(n==0)
+            return result;
+        Compare(result, temp, left, right);
+        return result;
+    }
+};
