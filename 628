@@ -1,0 +1,23 @@
+#include <iostream>
+#include <vector>
+using namespace std;
+class Solution {
+public:
+    int maximumProduct(vector<int>& nums) {
+        sort(nums.begin(),nums.end());
+        int result=0;
+        int end=nums.size()-1;
+        if(nums[end]<=0){
+            result=nums[end]*nums[end-1]*nums[end-2];
+        }
+        else{
+            int v1=nums[0]*nums[1];
+            int v2=nums[end-2]*nums[end-1];
+            if(v1>v2)
+                result=v1*nums[end];
+            else
+                result=v2*nums[end];
+        }
+        return result;
+    }
+};
