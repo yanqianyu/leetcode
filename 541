@@ -1,0 +1,18 @@
+#include <iostream>
+
+using namespace std;
+class Solution {
+public:
+    string reverseStr(string s, int k) {
+        int pos=0;
+        while(pos<s.size()){
+            if(pos+k>s.size())
+                k=s.size()-pos;
+            string temp=s.substr(pos,k);
+            reverse(temp.begin(),temp.end());
+            s.replace(pos,k,temp);
+            pos+=2*k;
+        }
+        return s;
+        }
+};
