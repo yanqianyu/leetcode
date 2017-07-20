@@ -1,0 +1,24 @@
+#include <iostream>
+#include <vector>
+#include <map>
+using namespace std;
+
+class Solution {
+public:
+    int leastBricks(vector<vector<int>>& wall) {
+        map<int,int> sum;
+        map<int,int>::iterator it;
+        for(int i=0;i<wall.size();i++){
+            int tempSum=0;
+            for(int j=0;j<wall[i].size()-1;j++){
+                tempSum+=wall[i][j];
+                sum[tempSum]++;
+            }
+        }
+        int res=0;
+        for(it=sum.begin();it!=sum.end();it++){
+            res=max(res,it->second);
+        }
+        return wall.size()-res;
+    }
+};
