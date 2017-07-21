@@ -1,0 +1,30 @@
+#include <iostream>
+
+#include <vector>
+using namespace std;
+class Solution {
+public:
+    bool static com(pair<int,int>a,pair<int, int> b){
+        return a.first<b.first;
+    }
+    int findMinArrowShots(vector<pair<int, int>>& points) {
+        if(points.size()==0)
+            return 0;
+        if(points.size()==1)
+            return 1;
+        sort(points.begin(),points.end(),com);
+        pair<int, int> temp=points[0];
+        int count=1;
+        for(int i=1;i<points.size();i++){
+            if(temp.second>=points[i].first){
+                temp.first=max(temp.first,points[i].first);
+                temp.second=min(temp.second,points[i].second);
+            }
+            else{
+                temp=points[i];
+                count++;
+            }
+        }
+        return count;
+    }
+};
