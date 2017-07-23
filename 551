@@ -1,0 +1,48 @@
+#include <iostream>
+#include<map>
+using namespace std;
+class Solution {
+public:
+    bool checkRecord(string s) {
+        map<char,int> MyMap;
+        map<char,int>::iterator it;
+        MyMap.insert(pair<char, int>('A',0));
+        MyMap.insert(pair<char, int>('L',0));
+        MyMap.insert(pair<char, int>('P',0));
+        for(int i=0;i<s.size();i++){
+            if(s[i]=='A'){
+                for(it=MyMap.begin();it!=MyMap.end();it++){
+                    if(it->first=='A')
+                        it->second++;
+                }
+            }
+            else if(s[i]=='L'){
+                for(it=MyMap.begin();it!=MyMap.end();it++){
+                    if(it->first=='L')
+                        it->second++;
+                }
+            }
+            else if(s[i]=='P'){
+                for(it=MyMap.begin();it!=MyMap.end();it++){
+                    if(it->first=='P')
+                        it->second++;
+                }
+            }
+        }
+        
+        for(it=MyMap.begin();it!=MyMap.end();it++){
+            if(it->first=='A')
+                if(it->second>1)
+                    return false;
+        }
+        
+        bool flag=true;
+        for(int i=0;i<s.size();i++){
+            if(s[i]=='L'){
+                if(s[i+1]=='L'&&s[i+2]=='L')
+                    return false;
+            }
+        }
+        return true;
+    }
+};
