@@ -1,0 +1,26 @@
+#include <iostream>
+
+using namespace std;
+struct TreeNode {
+    int val;
+    TreeNode *left;
+    TreeNode *right;
+    TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+};
+
+class Solution {
+public:
+    int Height=0;
+    int diameterOfBinaryTree(TreeNode* root) {
+        height(root);
+        return Height;
+    }
+    int height(TreeNode* root){
+        if(root==NULL)
+            return 0;
+        int left=height(root->left);
+        int right=height(root->right);
+        Height=max(Height,left+right);
+        return (max(left, right)+1);
+    }
+};
