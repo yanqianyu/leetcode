@@ -1,0 +1,25 @@
+#include <iostream>
+#include <vector>
+#include <map>
+using namespace std;
+class Solution {
+public:
+    int findDuplicate(vector<int>& nums) {
+        map<int,int> MyMap;
+        map<int,int>::iterator it;
+        for(int i=0;i<nums.size();i++){
+            if(MyMap.find(nums[i])==MyMap.end()){
+                MyMap.insert(pair<int, int>(nums[i],1));
+            }
+            else{
+                it=MyMap.find(nums[i]);
+                it->second++;
+            }
+        }
+        for(it=MyMap.begin();it!=MyMap.end();it++){
+            if(it->second!=1)
+                break;
+        }
+        return it->first;
+    }
+};
