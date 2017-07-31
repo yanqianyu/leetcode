@@ -1,0 +1,27 @@
+#include <iostream>
+#include <vector>
+using namespace std;
+struct TreeNode {
+    int val;
+    TreeNode *left;
+    TreeNode *right;
+    TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+};
+class Solution {
+public:
+    vector<int> dfs(TreeNode* root){
+        vector<int> res(2,0);//0 抢当前结点
+        if(root==NULL)
+            return res;
+        vector<int> lRes=dfs(root->left);
+        vector<int> rRes=dfs(root->right);
+        res[0]=lRes[1]+rRes[1]+root->val;
+        res[1]=max(lRes[0],lRes[1])+max(rRes[0],rRes[1]);
+        return res;
+    }
+    int rob(TreeNode* root) {
+        vector<int> res=dfs(root);
+        return max(res[0],res[1]);
+    }
+    
+};
