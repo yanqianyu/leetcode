@@ -1,0 +1,14 @@
+class Solution {
+public:
+    int leastInterval(vector<char>& tasks, int n) {
+        vector<int> vec(26,0);
+        for(auto &val:tasks){
+            vec[val-'A']++;
+        }
+        sort(vec.begin(),vec.end());
+        int i=25;
+        while(i>=0&&vec[25]==vec[i])
+            i--;
+        return max((vec[25]-1)*(n+1)+25-i,static_cast<int>(tasks.size()));
+    }
+};
