@@ -1,0 +1,17 @@
+#include <iostream>
+
+using namespace std;
+class Solution {
+public:
+    int helper(int n,bool left){
+        if(n==1)
+            return 1;
+        if(left==true)
+            return 2*helper(n/2, false);
+        else
+            return 2*helper(n/2, true)-1+n%2;
+    }
+    int lastRemaining(int n) {
+        return helper(n, true);
+    }
+};
